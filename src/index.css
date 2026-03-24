@@ -1,0 +1,150 @@
+@import url('https://fonts.googleapis.com/css2?family=VT323&display=swap');
+@import "tailwindcss";
+
+@theme {
+  --font-mono: "VT323", monospace;
+}
+
+body {
+  background-color: #050505;
+  color: #00ffff;
+  font-family: var(--font-mono);
+  text-transform: uppercase;
+  overflow-x: hidden;
+}
+
+.glitch-text {
+  position: relative;
+  text-shadow: 2px 0 #ff00ff, -2px 0 #00ffff;
+  animation: text-glitch 2s infinite linear alternate-reverse;
+}
+
+@keyframes text-glitch {
+  0% { text-shadow: 2px 0 #ff00ff, -2px 0 #00ffff; transform: translate(0); }
+  20% { text-shadow: -2px 0 #ff00ff, 2px 0 #00ffff; transform: translate(-1px, 1px); }
+  40% { text-shadow: 2px 0 #ff00ff, -2px 0 #00ffff; transform: translate(1px, -1px); }
+  60% { text-shadow: -2px 0 #ff00ff, 2px 0 #00ffff; transform: translate(0); }
+  80% { text-shadow: 2px 0 #ff00ff, -2px 0 #00ffff; transform: translate(2px, 2px); }
+  100% { text-shadow: -2px 0 #ff00ff, 2px 0 #00ffff; transform: translate(-2px, -2px); }
+}
+
+.static-noise {
+  position: fixed;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+  opacity: 0.12;
+  pointer-events: none;
+  z-index: 50;
+  animation: noise-shift 0.1s infinite;
+}
+
+@keyframes noise-shift {
+  0% { transform: translate(0, 0); }
+  100% { transform: translate(-1%, -1%); }
+}
+
+.scanlines {
+  position: fixed;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: linear-gradient(to bottom, transparent 50%, rgba(0, 0, 0, 0.3) 51%);
+  background-size: 100% 4px;
+  pointer-events: none;
+  z-index: 49;
+}
+
+.crt-flicker {
+  animation: flicker 0.15s infinite;
+}
+
+@keyframes flicker {
+  0% { opacity: 0.95; }
+  100% { opacity: 1; }
+}
+
+.brutal-border {
+  border: 2px solid #00ffff;
+  box-shadow: 4px 4px 0px #ff00ff;
+}
+
+.brutal-border-magenta {
+  border: 2px solid #ff00ff;
+  box-shadow: -4px 4px 0px #00ffff;
+}
+
+.btn-glitch {
+  position: relative;
+  background: #000;
+  color: #00ffff;
+  border: 2px solid #00ffff;
+  text-transform: uppercase;
+  transition: all 0.1s;
+}
+
+.btn-glitch:hover {
+  background: #00ffff;
+  color: #000;
+  box-shadow: 4px 4px 0px #ff00ff;
+  transform: translate(-2px, -2px);
+}
+
+.btn-glitch:active {
+  transform: translate(2px, 2px);
+  box-shadow: 0px 0px 0px #ff00ff;
+}
+
+.btn-glitch-magenta {
+  position: relative;
+  background: #000;
+  color: #ff00ff;
+  border: 2px solid #ff00ff;
+  text-transform: uppercase;
+  transition: all 0.1s;
+}
+
+.btn-glitch-magenta:hover {
+  background: #ff00ff;
+  color: #000;
+  box-shadow: -4px 4px 0px #00ffff;
+  transform: translate(2px, -2px);
+}
+
+.btn-glitch-magenta:active {
+  transform: translate(-2px, 2px);
+  box-shadow: 0px 0px 0px #00ffff;
+}
+
+/* Audio EQ */
+@keyframes eq-harsh {
+  0% { height: 10%; }
+  25% { height: 100%; }
+  50% { height: 30%; }
+  75% { height: 80%; }
+  100% { height: 10%; }
+}
+
+.animate-eq-harsh {
+  animation: eq-harsh 0.3s steps(3) infinite alternate;
+}
+
+/* Brutalist Range Slider */
+input[type=range] {
+  -webkit-appearance: none;
+  background: transparent;
+}
+input[type=range]::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  height: 16px;
+  width: 8px;
+  background: #ff00ff;
+  cursor: pointer;
+  border: none;
+  border-radius: 0;
+  margin-top: -6px;
+}
+input[type=range]::-webkit-slider-runnable-track {
+  width: 100%;
+  height: 4px;
+  cursor: pointer;
+  background: #00ffff;
+  border: none;
+}
